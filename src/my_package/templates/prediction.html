@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Prediction</title>
+    <link rel="stylesheet" href="../static/prediction.css">
+</head>
+
+<body>
+    <form action="/predict/{{folder}}" method="post" enctype="multipart/form-data">
+        <input type="file" name="image" id="image" required> <br><br>
+        <button type="submit">Predict</button>
+    </form>
+
+    <div class="prediction">
+        Prediction: {{prediction}}
+    </div>
+</body>
+
+</html>

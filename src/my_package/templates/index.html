@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Folder Upload Form</title>
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>Folder Upload</h2>
+        <form action="/folder_upload" method="post" enctype="multipart/form-data">
+            <label>
+                <input type="radio" name="folder_type" id="csv_format" value="csv_format" required>
+                With CSV
+            </label>
+            <label>
+                <input type="radio" name="folder_type" id="std_format" value="std_format" required>
+                Standard Format
+            </label>
+            <input type="file" name="folder" id="folder" accept=".zip" required>
+            {% if error %}
+            <div style="color: red; padding: 1px;">{{error}}</div>
+            {% endif %}
+            <button type="submit">Submit</button>
+        </form>
+
+    </div>
+
+</body>
+
+</html>

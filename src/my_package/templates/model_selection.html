@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Selection</title>
+    <link rel="stylesheet" href="../static/model_selection.css">
+</head>
+
+<body>
+
+    <div style="overflow-x:auto;">
+        {% if model_details_json %}
+
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Model</th>
+                    <th>Train Acc</th>
+                    <th>Test Acc</th>
+                    <th>Model Used</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for key, value in model_details_json.items() %}
+                <tr>
+                    <td>
+                        <form action="/model_selected/{{value.folder}}" method="get">
+                            <button>{{key}}</button>
+                        </form>
+                    </td>
+                    <td data-label="Train Acc">{{'%.2f' %(value.result.train_acc[-1] )}}%</td>
+                    <td data-label="Test Acc">{{'%.2f' %(value.result.test_acc[-1] )}}%</td>
+                    <td data-label="Model Used">{{value.result.model_used}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+    </div>
+</body>
+
+</html>

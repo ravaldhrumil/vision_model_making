@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Selection</title>
+    <link rel="stylesheet" href="../static/parameter_selection.css">
+    
+</head>
+
+<body>
+    <div class="container">
+        <div class="message">{{msg}}</div>
+        <div class="class-info">
+            <p>Class Names: {{class_names}}</p>
+
+            <p>Number of classes: {{num_classes}}</p>
+            <ul>
+                {% for obj in image_count %}
+                <li>Class name {{obj}} has {{image_count[obj]}} images</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <form id="modelForm" action="/selection/{{folder_name}}" method="post">
+            <div>
+                Please select a model <br>
+                <label for="EfficientNet"><input type="radio" name="model" id="EfficientNet" value="EfficientNet" required> EfficientNet</label>
+                <label for="ResNet152"><input type="radio" name="model" id="ResNet152" value="ResNet152" required> ResNet152</label>
+                <label for="VGG11"><input type="radio" name="model" id="VGG11" value="VGG11" required> VGG11</label>
+            </div>
+            <br>
+            <label for="epochs">Epochs: <input type="number" id="epochs" name="epochs" placeholder="Enter epochs" value="5" required></label>
+            <br><br>
+            <label for="learning_rate">Learning Rate: <input type="text" id="learning_rate" name="learning_rate" placeholder="Enter learning rate" value="0.01" required></label>
+            <span id="learningRateError" style="color: red;"></span>
+            <br><br>
+            <label for="model_name">Model name: <input type="text" id="model_name" name="model_name" placeholder="Enter model name" required></label>
+            <br><br>
+            <button type="submit">Submit</button>
+        </form>
+        
+    </div>
+    <script src="../static/parameter_selection.js"></script>
+</body>
+
+
+</html>

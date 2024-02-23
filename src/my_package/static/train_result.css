@@ -1,0 +1,42 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+}
+
+h2 {
+    margin-top: 20px;
+    color: #333;
+}
+
+.chart-container {
+    display: inline-block;
+    margin: 0 20px;
+}
+
+canvas {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 400px; /* Adjusted width for smaller charts */
+    height: 250px; /* Adjusted height for smaller charts */
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+    display: block;
+    width: 200px; /* Set width to keep buttons centered */
+    margin: 10px auto; /* Center buttons */
+}
+
+button:hover {
+    background-color: #0056b3;
+}
