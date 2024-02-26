@@ -17,6 +17,8 @@ def model_use_type():
 @model_interaction_views.route("/list_models", methods=["GET"])
 def list_models():
     model_details_json = {}
+    model_in_training = {}
+    count_in_training = 1
     count_trained = 1
     
     for root,_,files in os.walk(experiment_save_path):
@@ -29,6 +31,14 @@ def list_models():
                 count_trained+=1
 
     return render_template("model_selection.html", model_details_json=model_details_json)
+
+@model_interaction_views.route("/logs/<dir_name>", methods=["GET"])
+def logs(dir_name):
+    json_path = os.path.join(experiment_save_path, dir_name, "result.json")
+    with open(json_path, "r") as f:
+        data = json.load(f)
+
+    return render_template("train_result.html", train_result_data=data, chart_data=json.dumps(data))
 
 
 @model_interaction_views.route("/model_selected/<folder>", methods=["POST","GET"])
