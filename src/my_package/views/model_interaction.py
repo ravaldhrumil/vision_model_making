@@ -17,8 +17,6 @@ def model_use_type():
 @model_interaction_views.route("/list_models", methods=["GET"])
 def list_models():
     model_details_json = {}
-    model_in_training = {}
-    count_in_training = 1
     count_trained = 1
     
     for root,_,files in os.walk(experiment_save_path):

@@ -8,6 +8,8 @@ from Config.config import temporary_save_path, dataset_save_path
 validation_views = Blueprint('validation_views',__name__)
 
 def is_valid_std_format(folder_path):
+
+    img_count = 0
     try:
         no_of_folders = len(os.listdir(folder_path))
         if no_of_folders > 1:
@@ -36,12 +38,17 @@ def is_valid_std_format(folder_path):
             
        
             for file in os.listdir(path):
+                img_count+=1
                 if not file.lower().endswith(('.png', '.jpg', '.jpeg')):
                     return {"msg":f"Your folder {folder} contains file {file} which is not an image",
                             "validity":False}
             
     except NotADirectoryError:
         return {"msg":"There is no directory in your train folder",
+                "validity":False}
+    
+    if img_count < 10:
+        return {"msg":f"Minimum 10 images required",
                 "validity":False}
         
     return{"msg":"Uploaded folder is valid",
@@ -107,6 +114,7 @@ def convert_to_std_format(csv_file, folder_path):
 def is_valid_csv_format(folder_path):
     csv_count = 0
     csv_file = None
+    img_count = 0
 
     for root, dirs, files in os.walk(folder_path):
         if dirs:
@@ -121,9 +129,14 @@ def is_valid_csv_format(folder_path):
                     return {"msg":"There are multiple CSV files in the directory.",
                             "validity":False}
             
+                img_count+=1
                 if not file.lower().endswith(('.png', '.jpg', '.jpeg', ".csv")):
                     return {"msg":"There is a file which is not an image",
                             "validity":False}
+
+    if img_count < 10:
+        return {"msg":f"Minimum 10 images required",
+                "validity":False}
 
     if csv_count == 1:
         csv_check = csv_file_validation(csv_file, folder_path)
@@ -155,12 +168,7 @@ def extract_file(folder):
 
 def class_name_process(folder_path):
     class_details = {"no_of_classes":0, "class_names":[], "image_count":{}}
-    # class_details = {"no_of_classes":0, "class_names":[], "image_count":{}}
     for each_class_name in os.listdir(folder_path):
-        # pattern = re.compile('[^a-zA-Z]')
-        # original_name = each_class_name
-        # each_class_name = re.sub(pattern, '', each_class_name)
-        # os.rename(os.path.join(folder_path,original_name),os.path.join(folder_path,each_class_name))
         class_details["class_names"].append(each_class_name)
 
         for _,_,files in os.walk(os.path.join(folder_path,each_class_name)):
