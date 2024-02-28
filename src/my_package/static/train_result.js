@@ -63,9 +63,3 @@ var accuracyChart = new Chart(ctxAccuracy, {
         }
     }
 });
-
-// Add an event listener to the button
-document.getElementById('goBackButton').addEventListener('click', function() {
-    // Go back to the previous window
-    window.history.back();
-});

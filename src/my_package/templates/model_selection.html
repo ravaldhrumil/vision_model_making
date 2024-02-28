@@ -16,16 +16,17 @@
         {% if model_details_json %}
 
         {% for key, value in model_details_json.items() %}
-            {% if value.result.status == "incomplete" %}
-                <div>Your model with name <b>"{{value.result.model_name}}"</b> is currently TRAINING...... on
-                                         {{value.result.pretrained_model_name}}</div>
-            {% endif %}
+        {% if value.result.status == "incomplete" %}
+        <div>Your model with name <b>"{{value.result.model_name}}"</b> is currently TRAINING on...... 
+            {{value.result.pretrained_model_name}}</div>
+        {% endif %}
         {% endfor %}
 
         <table>
             <thead>
                 <tr>
                     <th>Model</th>
+                    <th>Prediction</th>
                     <th>Train Acc</th>
                     <th>Test Acc</th>
                     <th>Model Used</th>
@@ -34,13 +35,14 @@
             </thead>
             <tbody>
                 {% for key, value in model_details_json.items() %}
-                {% if  value.result.status == "completed" %}
-                    
-                
+                {% if value.result.status == "completed" %}
+
+
                 <tr>
+                    <td>{{value.result.model_name}}</td>
                     <td>
                         <form action="/model_selected/{{value.folder}}" method="get">
-                            <button>{{key}}</button>
+                            <button>Prediction</button>
                         </form>
                     </td>
                     <td data-label="Train Acc">{{'%.2f' %(value.result.train_acc[-1] )}}%</td>
@@ -58,15 +60,22 @@
         </table>
         {% endif %}
     </div>
- 
-        <button id="goBackButton">Train Again</button>
-        <script>
-            document.getElementById('goBackButton').addEventListener('click', function() {
-                // Go back to the previous window
-                window.history.back();
-            });
-        </script>
-    
+
+    <button id="goBackButton">Train Again</button>
+
+    <form action="/to_download_model">
+        <button>
+            Download Model
+        </button>
+    </form>
+
+    <script>
+        document.getElementById('goBackButton').addEventListener('click', function () {
+            // Go back to the previous window
+            window.history.back();
+        });
+    </script>
+
 </body>
 
 </html>

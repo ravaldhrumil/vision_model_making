@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Line Charts</title>
+    <title>Logs</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="../static/train_result.css">
 </head>
@@ -24,11 +24,6 @@
         <canvas id="accuracyChart" width="400" height="300"></canvas>
     </div> 
     
-    <form action="/model_use_type" method="get">
-        <button type="submit">Go Ahead</button>
-    </form>
-    <!-- <button id="goBackButton">Train Again</button> -->
-
     <script>
         var chart_data = JSON.parse('{{ chart_data | safe }}')
     </script>
