@@ -7,7 +7,7 @@ from src.my_package.views.model_interaction import model_interaction_views
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///ML_Models.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config["SECRET_KEY"] = '&^\xc9\xc5\x93\x8f+Ll\r\xaa\xc2BFD\x05'
+app.config["SECRET_KEY"] = ''
 db.init_app(app)
 
 app.register_blueprint(validation_views)
